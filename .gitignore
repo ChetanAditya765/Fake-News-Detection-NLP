@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environment
+venv/
+env/
+
+# IDE settings
+.vscode/
+.idea/
+
+# Models and datasets
+models/
+*.pkl
+*.csv
+
+# Jupyter notebooks checkpoints
+.ipynb_checkpoints/
+
+# Streamlit logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db

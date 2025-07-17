@@ -136,12 +136,16 @@ def create_sample_dataset():
     return df
 
 if __name__ == "__main__":
-    # Create sample dataset
-    sample_df = create_sample_dataset()
-    sample_df.to_csv("data/sample_dataset.csv", index=False)
-
-    # Test preprocessing
     preprocessor = DataPreprocessor()
-    processed_df = preprocessor.load_and_preprocess_data("data/sample_dataset.csv")
-    print("\nSample processed data:")
-    print(processed_df[['text', 'processed_text', 'label']].head())
+
+    # ✅ Load and preprocess the real dataset
+    processed_df = preprocessor.load_and_preprocess_data(
+        "data/raw/WELFake_Dataset.csv", 
+        text_column="text", 
+        label_column="label"
+    )
+
+    # ✅ Save the cleaned data for training
+    processed_df.to_csv("data/processed/fake_news_cleaned.csv", index=False)
+
+    print("✅ Full dataset preprocessing complete and saved.")

@@ -25,7 +25,7 @@ class ModelTrainer:
         self.models = {
             'logistic_regression': LogisticRegression(random_state=42, max_iter=1000),
             'random_forest': RandomForestClassifier(n_estimators=100, random_state=42),
-            'svm': SVC(random_state=42, probability=True),
+            'svm': SVC(kernel='linear', probability=True, random_state=42),
             'naive_bayes': MultinomialNB()
         }
 
@@ -224,5 +224,39 @@ def hyperparameter_grids():
     }
 
 if __name__ == "__main__":
-    # This will be called from the main training script
-    print("Model training module loaded successfully!")
+    print("🚀 Starting model training...")
+
+    # Load preprocessed data
+    df = pd.read_csv('data/processed/fake_news_cleaned.csv')
+  # or your correct file path
+
+    # Ensure target and features exist
+    if 'text' not in df.columns or 'label' not in df.columns:
+        raise ValueError("Expected 'text' and 'label' columns in dataset")
+
+    # Convert text to features
+    from sklearn.feature_extraction.text import TfidfVectorizer
+    from sklearn.model_selection import train_test_split
+
+    vectorizer = TfidfVectorizer(max_features=5000)
+    X = vectorizer.fit_transform(df['text'])
+    y = df['label']
+
+    # Save the vectorizer
+    joblib.dump(vectorizer, 'models/vectorizer.pkl')
+
+    # Train-test split
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+    # Train models
+    trainer = ModelTrainer()
+    trainer.train_all_models(X_train, y_train, X_test, y_test)
+
+    # Save models
+    trainer.save_models()
+
+    # Optionally plot confusion matrices
+    trainer.plot_confusion_matrices()
+
+import sys
+sys.exit(0)
