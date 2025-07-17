@@ -42,7 +42,7 @@ Fake-News-Detection-NLP/
 ├── src/
 │   ├── data_preprocessing.py
 │   ├── model_training.py
-│   └── utils.py
+│   └── explainableai.py
 │
 ├── web_app/
 │   └── streamlit_app.py
@@ -101,14 +101,15 @@ pip install -r requirements.txt
 
 ---
 
-## 🧪 Example Input
+## 📊 Model Performance Summary
 
-**Text**:
-> "Breaking: NASA discovers signs of microbial life on Mars in new soil samples."
+| Model                | Accuracy | Precision | Recall | F1-Score |
+|----------------------|----------|-----------|--------|----------|
+| **SVM**              | 0.9513   | 0.9471    | 0.9582 | 0.9526   |
+| **Logistic Regression** | 0.9440   | 0.9410    | 0.9501 | 0.9455   |
+| **Random Forest**    | 0.9435   | 0.9233    | 0.9701 | 0.9461   |
+| **Naive Bayes**      | 0.8429   | 0.8294    | 0.8720 | 0.8501   |
 
-**Output**:
-- Prediction: Real
-- Confidence: 0.92
 
 ---
 
@@ -124,3 +125,5 @@ pip install -r requirements.txt
 - [WELFake Dataset (Zenodo)](https://zenodo.org/record/4561253)
 - [Scikit-learn](https://scikit-learn.org/)
 - [Streamlit](https://streamlit.io/)
+
+  ![Prediction Demo](Sample_output.png)
